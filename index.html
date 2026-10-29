@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Tool Directory – Find the right AI tool</title>
+  <meta name="description" content="A simple directory of popular AI tools for writing, images, coding and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="logo" href="index.html">AI Tool Directory</a>
+      <nav class="nav"><a href="index.html">Home</a><a href="directory.html">Directory</a></nav>
+    </header>
+
+    <main>
+      <!-- HERO: the search box sends the visitor to page 2 with their words -->
+      <section class="hero">
+        <h1>Find the right AI tool in seconds</h1>
+        <p>Browse popular AI tools for writing, images, coding, video and more. Search by name or pick a category.</p>
+        <form class="search-row" action="directory.html" method="get">
+          <input type="search" name="q" placeholder="Try &quot;image&quot; or &quot;coding&quot;" aria-label="Search AI tools">
+          <button class="btn" type="submit">Search tools</button>
+        </form>
+      </section>
+
+      <!-- CATEGORIES: each card opens page 2 already filtered -->
+      <h2 class="section-title">Browse by category</h2>
+      <section class="cats">
+        <a class="cat" href="directory.html?cat=Chat">      <div class="icon">💬</div><h3>Chat &amp; Research</h3><p>Ask questions, get answers</p></a>
+        <a class="cat" href="directory.html?cat=Image">     <div class="icon">🎨</div><h3>Image</h3><p>Create and edit pictures</p></a>
+        <a class="cat" href="directory.html?cat=Coding">    <div class="icon">💻</div><h3>Coding</h3><p>Write and fix code faster</p></a>
+        <a class="cat" href="directory.html?cat=Writing">   <div class="icon">✍️</div><h3>Writing</h3><p>Draft and polish text</p></a>
+        <a class="cat" href="directory.html?cat=Video%20%26%20Audio"><div class="icon">🎬</div><h3>Video &amp; Audio</h3><p>Voice, music and video</p></a>
+      </section>
+
+      <h2 class="section-title">How it works</h2>
+      <section class="steps">
+        <div class="step"><h3>1. Search or browse</h3><p>Type what you need or choose a category.</p></div>
+        <div class="step"><h3>2. Compare tools</h3><p>Read a short description and see if it is free.</p></div>
+        <div class="step"><h3>3. Visit the tool</h3><p>Open the official website in one click.</p></div>
+      </section>
+
+      <section class="cta">
+        <h2>Ready to explore?</h2>
+        <a class="btn" href="directory.html">Browse all tools</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">Made by YOUR NAME · Emerging Technologies project</footer>
+  </div>
+</body>
+</html>

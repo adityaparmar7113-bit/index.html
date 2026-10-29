@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Directory – AI Tool Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <a class="logo" href="index.html">AI Tool Directory</a>
+      <nav class="nav"><a href="index.html">Home</a><a href="directory.html">Directory</a></nav>
+    </header>
+
+    <main>
+      <section class="page-head">
+        <h1>All AI tools</h1>
+        <p>Search by name or filter by category.</p>
+      </section>
+
+      <div class="tools-bar">
+        <input type="search" id="search" placeholder="Search tools..." aria-label="Search tools">
+        <select id="category" aria-label="Filter by category">
+          <option value="All">All categories</option>
+          <option>Chat</option><option>Image</option><option>Coding</option>
+          <option>Writing</option><option>Video &amp; Audio</option>
+        </select>
+      </div>
+      <div class="count" id="count" aria-live="polite"></div>
+      <section class="tool-grid" id="list"></section>
+    </main>
+
+    <footer class="site-footer">Made by YOUR NAME · Emerging Technologies project · Check each tool's website for current pricing.</footer>
+  </div>
+
+  <script>
+    // 1. THE DATA. To add a tool, copy one line and change the values.
+    const tools = [
+      { name: "ChatGPT",        cat: "Chat",   price: "Freemium", url: "https://chatgpt.com",                   desc: "General-purpose AI assistant for questions, writing and brainstorming." },
+      { name: "Claude",         cat: "Chat",   price: "Freemium", url: "https://claude.ai",                     desc: "AI assistant for writing, analysis, coding and long documents." },
+      { name: "Gemini",         cat: "Chat",   price: "Freemium", url: "https://gemini.google.com",             desc: "Google's AI assistant, connected to Google apps and search." },
+      { name: "Perplexity",     cat: "Chat",   price: "Freemium", url: "https://www.perplexity.ai",             desc: "AI search engine that answers questions with sources." },
+      { name: "Midjourney",     cat: "Image",  price: "Paid",     url: "https://www.midjourney.com",            desc: "Creates detailed artistic images from text descriptions." },
+      { name: "Canva",          cat: "Image",  price: "Freemium", url: "https://www.canva.com",                 desc: "Design tool with AI features for posters, slides and social posts." },
+      { name: "GitHub Copilot", cat: "Coding", price: "Freemium", url: "https://github.com/features/copilot",   desc: "Suggests code as you type inside your editor." },
+      { name: "Grammarly",      cat: "Writing",price: "Freemium", url: "https://www.grammarly.com",             desc: "Checks grammar and improves tone and clarity of your writing." },
+      { name: "Notion AI",      cat: "Writing",price: "Paid",     url: "https://www.notion.so/product/ai",      desc: "Summarises notes and drafts text inside your Notion workspace." },
+      { name: "ElevenLabs",     cat: "Video & Audio", price: "Freemium", url: "https://elevenlabs.io",          desc: "Turns text into natural-sounding speech in many voices." },
+      { name: "Runway",         cat: "Video & Audio", price: "Freemium", url: "https://runwayml.com",           desc: "Generates and edits video using AI." },
+      { name: "Suno",           cat: "Video & Audio", price: "Freemium", url: "https://suno.com",               desc: "Makes songs with vocals from a short text prompt." }
+    ];
+
+    const list = document.getElementById("list");
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const count = document.getElementById("count");
+
+    // 2. Read values sent from the landing page (?q=image or ?cat=Coding)
+    const params = new URLSearchParams(window.location.search);
+    search.value = params.get("q") || "";
+    const startCat = params.get("cat");
+    if (startCat) category.value = startCat;
+
+    // 3. Draw the cards that match the search + category
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      const c = category.value;
+      const shown = tools.filter(t =>
+        (c === "All" || t.cat === c) &&
+        (t.name + " " + t.desc + " " + t.cat).toLowerCase().includes(q)
+      );
+      count.textContent = shown.length + (shown.length === 1 ? " tool found" : " tools found");
+      list.innerHTML = shown.length ? shown.map(t => `
+        <article class="tool">
+          <h3>${t.name}</h3>
+          <div class="tags"><span class="tag">${t.cat}</span><span class="tag price">${t.price}</span></div>
+          <p>${t.desc}</p>
+          <a class="visit" href="${t.url}" target="_blank" rel="noopener">Visit ${t.name}</a>
+        </article>`).join("")
+        : '<p class="empty">No tools match. Try a different word or choose All categories.</p>';
+    }
+
+    search.addEventListener("input", render);
+    category.addEventListener("change", render);
+    render();
+  </script>
+</body>
+</html>
